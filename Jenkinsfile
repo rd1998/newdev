@@ -25,6 +25,12 @@ pipeline {
 			sh 'docker push darshanrami/rdrep:latest'
 		}
 	}
+	    
+	stage('File transfer into minikube server') {
+            steps {
+	        sh 'scp -r /var/lib/jenkins/workspace/dev-assess/demochart ubuntu@172.31.40.23:/home/ubuntu/project'
+			}		
+	}   
 // 	stage('File transfer into minikube server') {
 //             steps {
 // 	        sh 'scp -r /var/lib/jenkins/workspace/jenkins-docker/* ubuntu@172.31.17.56:/home/ubuntu/project'
@@ -36,7 +42,7 @@ pipeline {
 	    
 //  	    ssh ubuntu@172.31.17.56 << EOF
 //        	    cd project
-//             helm install "rutu-$BUILD_NUMBER" demochart
+//             helm install "darshan-$BUILD_NUMBER" demochart
 // 	    exit
 // 	    << EOF
 // 	    """
